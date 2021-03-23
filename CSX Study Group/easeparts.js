@@ -3,15 +3,15 @@
 * =========== */
 
 //Uncomment the lines below to test your code
-// console.log(typeof 7.0 === "_______")
-// console.log(typeof 22 === "_______")
-// console.log(typeof true === "_______")
+console.log(typeof 7.0 === "number")
+console.log(typeof 22 === "number")
+console.log(typeof true === "boolean")
 
 var myVar;
-// console.log(typeof myVar === "_______")
+console.log(typeof myVar === "undefined")
 
-//myVar = //add your name here
-// console.log(typeof myVar === "_______")
+myVar = "Yanming Yu"
+console.log(typeof myVar === "string")
 
 //Comment them back out with two forward slashes at the beginning once you have finished
 

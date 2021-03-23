@@ -76,3 +76,9 @@ Examples
 Write a function that takes in an array and returns a new array with duplicates removed
 Ex: deleteDups(['a','a','a']) -> ['a']
 */
+
+
+
+/*
+Write a function that returns the length of a string. Make your function recursive.
+*/
