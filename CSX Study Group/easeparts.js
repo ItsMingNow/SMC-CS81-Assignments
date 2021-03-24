@@ -1,42 +1,42 @@
 /* ========== *
-* Challenge 1 *
+* Challenge 1 * X
 * =========== */
 
 //Uncomment the lines below to test your code
-console.log(typeof 7.0 === "number")
-console.log(typeof 22 === "number")
-console.log(typeof true === "boolean")
+// console.log(typeof 7.0 === "number")
+// console.log(typeof 22 === "number")
+// console.log(typeof true === "boolean")
 
-var myVar;
-console.log(typeof myVar === "undefined")
+// var myVar;
+// console.log(typeof myVar === "undefined")
 
-myVar = "Yanming Yu"
-console.log(typeof myVar === "string")
+// myVar = "Yanming Yu"
+// console.log(typeof myVar === "string")
 
 //Comment them back out with two forward slashes at the beginning once you have finished
 
 
 /* ========== *
-* Challenge 2 *
+* Challenge 2 * X
 * =========== */
 
 
-function buildSentence(word1, word2, word3) {
-  //your code goes here...
+// function buildSentence(word1, word2, word3) {
+//   console.log(`${word1} ${word2} ${word3}`);
 
-}
+// }
 
-//buildSentence("coding", "is", "awesome") //=> "Coding is awesome."
-//buildSentence("we're", "number", "1") //=> "We're number 1."
+// buildSentence("coding", "is", "awesome") //=> "Coding is awesome."
+// buildSentence("we're", "number", "1") //=> "We're number 1."
 
 
 /* ========== *
-* Challenge 3 *
+* Challenge 3 * X
 * =========== */
 
 
 function lastLetter(word) {
-  //your code goes here...
+  console.log(word[word.length-1]);
 }
 
 //Uncomment the lines below to test your code
@@ -46,78 +46,112 @@ function lastLetter(word) {
 
 
 /* ========== *
-* Challenge 4 *
+* Challenge 4 * X
 * =========== */
 
 
 function buildGreeting(time, name) {
-  //your code goes here...
+if(time < 12){
+  console.log(`Good Morning, ${name}`);
+}
+else if(time < 18){
+  console.log(`Good Afternoon, ${name}`);
+}
+else if (time < 25){
+  console.log(`Good Evening, ${name}`);
+}
+else {
+  console.log(`That's not a realy time, ${name}. Maybe you need some sleep!`);
+}
 
 }
 
 
-//buildGreeting(8, "Maggie") //=> "Good Morning, Maggie!"
-//buildGreeting(12, "John") //=> "Good Afternoon, John!"
-//buildGreeting(22, "Stacey") //=> "Good Evening, Stacey!"
-//buildGreeting(31, "Derrick") //=> "That's not a real time, Derrick. Maybe you need some sleep!"
+
+// buildGreeting(8, "Maggie"); //=> "Good Morning, Maggie!"
+// buildGreeting(12, "John"); //=> "Good Afternoon, John!"
+// buildGreeting(22, "Stacey"); //=> "Good Evening, Stacey!"
+// buildGreeting(31, "Derrick"); //=> "That's not a real time, Derrick. Maybe you need some sleep!"
 
 
 /* ========== *
-* Challenge 5 *
+* Challenge 5 * x
 * =========== */
 
 
-// console.log( "CodeSmith".indexOf("o") === __ )
-// console.log( "hello".indexOf("ll") === __ )
-// console.log( "zebra".indexOf("z") === __ )
-// console.log( "banana".indexOf("B") === __ )
+// console.log( "CodeSmith".indexOf("o")); 
+// console.log( "hello".indexOf("ll")); 
+// console.log( "zebra".indexOf("z")); 
+// console.log( "banana".indexOf("B")); 
 
 
 /* ========== *
-* Challenge 6 *
+* Challenge 6 * x
 * =========== */
 
 
 function letterExists(word, letter) {
-  //your code goes here...
-
+  return console.log(word.includes(letter));
 }
 
-// letterExists("superman", "e") //=> true
+// letterExists("superman", "e"); //=> true
 // letterExists("starship", "S") //=> false
 // letterExists("th1s", "1") //=> true
 // letterExists("he!lo", "!") //=> true
 
 
 /* =========== *
-* Challenge 7 *
+* Challenge 7 * x
 * ============ */
 
 
 function isPrime(number) {
-  // your code here...
-
+  if(number < 0){
+    for(let i = number + 1; i < 0; i++){
+      if (number % i == 0){
+        return false;
+      }
+    }
+  }
+  for(let i = 2; i < number; i++){
+    if (number % i == 0){
+      return false;
+    }
+  }
+  return true
 }
 
-// isPrime(-7): // => false
-// isPrime(2); // => true
-// isPrime(11); // => true
-// isPrime(15); // => false
+// console.log(isPrime(-7)); // => false
+// console.log(isPrime(2)); // => true
+// console.log(isPrime(11)); // => true
+// console.log(isPrime(15)); // => false
 
 
 /* ========== *
-* Challenge 8 *
+* Challenge 8 * x
 * =========== */
 
 
 function range(start, end) {
-  //your code goes here...
+  if(start < end){
+    for(let i = start; i <= end; i++){
+      console.log(i);
+    }
+  }
+  else if(end < start){
+    for(let i = start; i >= end; i--){
+      console.log(i);
+    }
+  }
+  else{
+    return false;
+  }
 
 }
 
 //Uncomment the lines below to test your code
-// range(1,4) //=> 1, 2, 3, 4
-// range(4,2) //=>
+// range(1,4); //=> 1, 2, 3, 4
+// range(4,2); //=>
 
 
 /* =========== *

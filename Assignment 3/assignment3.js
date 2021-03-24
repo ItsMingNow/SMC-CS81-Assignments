@@ -9,10 +9,10 @@ explaining whether the resulting string has an odd or even amount of the passed 
 function RecursiveCopy(str, n) {
   let oddOrEven;
   if (n % 2 === 0){
-    oddOrEven = "odd";
+    oddOrEven = "an odd";
   }
   else {
-    oddOrEven = "even";
+    oddOrEven = "a even";
   }
 
   var recursiveFunction = (str, n) =>{
@@ -23,7 +23,7 @@ function RecursiveCopy(str, n) {
   }
   
   
-  console.log(`${recursiveFunction(str,n)} has an ${oddOrEven} of ${str}'s`)
+  console.log(`${recursiveFunction(str,n)} has ${oddOrEven} of ${str}'s`)
 }
 
-RecursiveCopy("a", 3);
+RecursiveCopy("a", 5);
