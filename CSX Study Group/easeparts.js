@@ -155,40 +155,70 @@ function range(start, end) {
 
 
 /* =========== *
-* Challenge 9 *
+* Challenge 9 * x
 * ============ */
 
 
 function myIndexOf(array, ele){
-  // your code here...
 
+  for(let i = 0; i<array.length ; i++){
+    if(ele === array[i]){
+      return console.log(i);
+    }
+  }
+  return console.log(-1);
 }
 
-//myIndexOf([1, 2, 3, 4, 5], 5) //=> 4
-//myIndexOf(["a", "b", "c"], "a") //=> 0
-//myIndexOf(["a", "b", "c"], "d") //=> -1
+// myIndexOf([1, 2, 3, 4, 5], 5) //=> 4
+// myIndexOf(["a", "b", "c"], "a") //=> 0
+// myIndexOf(["a", "b", "c"], "d") //=> -1
 
 
 /* =========== *
-* Challenge 10 *
+* Challenge 10 * X
 * ============ */
 
 function unique(array) {
-  //your code goes here...
 
+  const newArray = [];
+
+  for(let i = 0; i<array.length ; i++){
+    if(!newArray.includes(array[i])){
+      newArray.push(array[i]);
+    }
+  }
+
+  return console.log(newArray);
+
+  //declare new array
+  // if element in array does not exist in newArray, push into new array
+  //return array
 }
 
-// unique([1, 1, 2, 3, 3]) => [1, 2, 3]
-// unique(["a", "a", "c", "aa", "b", "b"]) => ["a", "c", "aa", "b"]
+// unique([1, 1, 2, 3, 3]) //=> [1, 2, 3]
+// unique(["a", "a", "c", "aa", "b", "b"]) //=> ["a", "c", "aa", "b"]
 
 
 /* =========== *
-* Challenge 11 *
+* Challenge 11 * x
 * ============ */
 
 function longestWord(sentence) {
-  // your code here...
 
+  const newArray = sentence.split(" ");
+
+  let longestWord = newArray[0];
+
+  for(let i = 0; i<newArray.length; i++){
+  if(newArray[i].length >= longestWord.length)
+    longestWord = `'${newArray[i]}'`;
+  }
+
+  return longestWord;
+  // declare newarray 
+  // use split string method on sentence so each word is an element in the array
+  // declare variable to keep track of longest word, assign to first element
+  // iterate through newArray, if word length is longer that variable, reassign variable
 }
 
 //Uncomment the lines below to test your function:
@@ -204,8 +234,20 @@ function longestWord(sentence) {
 * ============ */
 
 function disemvowel(string) {
-  // your code here...
-  
+  // make array of vowels
+  // declare a new array to hold non vowel letters
+  // iterate through string, if the letter is non vowel, push into new array
+
+  const arrOfVow = [ 'a', 'e', 'i', 'o', 'u'];
+
+  const newArray = [];
+
+  for (let i = 0; i<string.length; i++){
+    if(!arrOfVow.includes(string[i])){
+      newArray.push(string[i]);
+    }
+  }
+  return newArray.join('');
 }
 
 
@@ -217,11 +259,30 @@ function disemvowel(string) {
 
 
 /* =========== *
-* Challenge 13 *
+* Challenge 13 * x
 * ============ */
 
 function divisibleByFivePairSum(array){
-  // your code here...
+
+  const newArray = [];
+
+  // console.log(` The array length is ${array.length} `);
+
+  for(let i = 0; i<array.length ; i++){
+    for(let j = i + 1 ; j<array.length; j++)
+    {
+      // console.log(`iteration i is ${i} and j is ${j}`)
+      if((array[i] + array[j]) % 5 === 0){
+        newArray.push([i,j])
+      }
+    }
+  }
+
+  return newArray;
+
+  //iterate through array, nest another array so you can check all value together
+  // if two indexes add up to the integer 5,  push an array into New array
+  // return your array of arrays
 }
 
 
@@ -236,21 +297,39 @@ function divisibleByFivePairSum(array){
 * ============ */
 
 function highestScore(students) {
-  // your code here...
 
+  let highScore = students[0];
+  for(let i = 0; i<students.length; i++)
+  {
+    if (highScore.score < students[i].score){
+      highScore = students[i];
+    }
+    // console.log(students[i]);
+  }
 
+  let initial = highScore.name.split(' ')
+  let newArray = []
+  for(let j = 0; j<initial.length; j++){
+    newArray.push(initial[j][0])
+  }
+
+  
+  return `${newArray.join('')}${highScore.id}`
+  
 }
 
 //Uncomment the lines below to test your function:
 
-// var students = [
-// {name: 'Will Sentance', id: 128, score: -42},
-// {name: 'Jamie Bradshaw', id: 32, score: 57},
-// {name: 'Lisa Simpson', id: 2, score: 99},
-// {name: 'Luke Skywalker', id: 256, score: 94}
-// ];
+var students = [
+{name: 'Will Sentance', id: 128, score: -42},
+{name: 'Jamie Bradshaw', id: 32, score: 57},
+{name: 'Lisa Simpson', id: 2, score: 99},
+{name: 'Luke Skywalker', id: 256, score: 94}
+];
 
-// console.log(highestScore(students)); //=> 'LS2'
+// highestScore(students);
+
+console.log(highestScore(students)); //=> 'LS2'
 
 
 /* =========== *
