@@ -293,7 +293,7 @@ function divisibleByFivePairSum(array){
 
 
 /* =========== *
-* Challenge 14 *
+* Challenge 14 * x
 * ============ */
 
 function highestScore(students) {
