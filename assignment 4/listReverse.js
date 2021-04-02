@@ -24,6 +24,7 @@ function reverseList(object) {
             }
             if(key == "next"){
                 if(object[key] == null){
+                    index = 0;
                     break;
                 }
                 reassignObj(object[key]);
@@ -46,8 +47,10 @@ function reverseList(object) {
 
 
 var list = { value: 1, next: { value: 2, next: { value: 3, next: null } } };
+var list2 = { value: 'a', next: { value: 'b', next: { value: 'c', next: null } } };
 
 console.log(reverseList(list));
+console.log(reverseList(list2));
 
 //Example Test Case(s):
 
@@ -56,5 +59,3 @@ console.log(reverseList(list));
 
 //Arguments: { value: "a", next: { value: "b", next: { value: "c", next: null } } };
 //Returns: { value: "c", next: { value: "b", next: { value: "a", next: null } } };
-
-// arg is a object { k:v(number) , k:v{object} }
