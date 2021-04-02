@@ -32,13 +32,24 @@ function reverseList(object) {
         }
     }
 
+    function reverseTheArray(array){
+        const incomingArrayLength = array.length;
+        const newArray = []
+
+        for(let i = 0; i<incomingArrayLength; i++){
+            newArray.push(array.pop());
+        }
+
+        return newArray
+    }
+
     let index = 0;
 
     const valueList = [];
 
     collectObjVal(object);
   
-    const reverseArray = valueList.reverse();
+    const reverseArray = reverseTheArray(valueList);
 
     reassignObj(object);
 
