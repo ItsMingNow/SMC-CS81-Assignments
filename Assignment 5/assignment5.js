@@ -211,26 +211,6 @@ function printFirstName(arryOfObj){
     }
 }
 
-//find average english grades with length array method
-function averageEng(arryOfObj){
-    let sum = 0;
-    for (let i in arryOfObj){
-        sum += arryOfObj[i].english;
-    }
-
-    return Math.round(sum/arryOfObj.length);
-}
-
-//find average age with length arrat method
-function averageAge(arryOfObj){
-    let sum = 0;
-    for (let i in arryOfObj){
-        sum += arryOfObj[i].age;
-    }
-
-    return Math.round(sum/arryOfObj.length);
-}
-
 const newSet = dataSet.filter( obj =>
     {if(obj.age<aveAge && obj.english>aveEng){
         return true;
