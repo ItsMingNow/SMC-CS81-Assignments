@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Schedule</title>
+    <style>
+        table { border-collapse: collapse; }
+        td, th { border: 1px solid black; padding: 3px 8px; }
+        th { text-align: left; }
+    </style>
+</head>
+<body>
+
+<script>
+    // let body = document.querySelector(body);
+    let schedule = [
+        {Week: "1", Begins: "03/08", Topic: ["Introduction", "Chapter 1: Values Types Operators", "Assignment 1 due 11:59pm 03/14"]},
+        {Week: "2", Begins: "03/15", Topic: ["Chapter 2: Programming Structure", "Assignment 2 due 11:59pm 03/21"]},
+        {Week: "3", Begins: "03/22", Topic: ["Chapter 3: Functions", "Assignment 3 due 11:59pm 03/28"]},
+        {Week: "4", Begins: "03/29", Topic: ["Chapter 4: Data Structures // Objects and Arrays", "Assignment 4 due 11:59pm 04/04"]},
+        {Week: "5", Begins: "04/05", Topic: ["Chapter 5: Higher-Order Functions", "Assignment 5 due 11:59pm 04/11", "Test 1: Tuesday 12am (04/06) - Friday 12:00pm (04/09)"]},
+        {Week: "6", Begins: "04/19", Topic: [ "Chapter 6: The Secret Life of Objects", "Chapter 8: Bugs and Errors", "Assignment 6 due 11:59pm 04/25"]},
+        {Week: "7", Begins: "04/26", Topic: [ "Chapter 13: Values Types Operators",  "Chapter 14:The Document Oject Model", "Assignment 7 due 11:59pm 05/02"]},
+        {Week: "8", Begins: "05/03", Topic: [ "Chapter 11: Values Types Operators", "Chapter 15: Handling Events", "Assignment 8 due 11:59pm 05/09"]},
+        {Week: "9", Begins: "05/10", Topic: [ "Chapter 18: Values Types Operators", "Assignment 9 due 11:59pm 05/16"]},
+        {Week: "10", Begins: "05/17", Topic: [ "Chapter 20: Values Types Operators", "Assignment 10 due 11:59pm 05/23"]},
+        {Week: "11", Begins: "05/24", Topic: [ "JQuery // AJAX (Lecture Notes)", "Bonus Assignment due 11:59pm 05/30 (but you may submit until the end of the semester)"]},
+        {Week: "12", Begins: "05/31", Topic: ["No Assignment.", "Test 2: Monday 12am (05/31) - Thursday 11:59pm (06/03)", "Please take this week to finish up your semester project as well.", "Semester Project due Saturday 11:59 PM (06/05)"]},
+        {Week: "", Begins: "06/06", Topic: ["Course Ends"]}
+    ];
+
+    function buildTable(data){
+        let headerInfo = Object.keys(data[0]);
+        let table = document.createElement("TABLE");
+        let thead = table.createTHead();
+        let row = thead.insertRow();
+
+        for (let key of headerInfo){
+            // console.log(key);
+            let th = document.createElement("th");
+            let text = document.createTextNode(key);
+            th.appendChild(text);
+            row.appendChild(th);
+        }
+
+        
+
+        for (let obj of data){
+            // console.log(Object.values(obj));
+            let tableRow = table.insertRow();
+            for(key in obj){
+                if((typeof obj[key]) === 'object'){
+                    let cell = tableRow.insertCell();
+                    let text = document.createTextNode(obj[key].join(', '));
+                    cell.appendChild(text);
+                }
+                else{
+                    let cell = tableRow.insertCell();
+                    let text = document.createTextNode(obj[key]);
+                    cell.appendChild(text);
+                }
+            }
+        }
+
+        document.body.appendChild(table);
+    }
+
+    buildTable(schedule);
+    
+</script>
+
+</body>
+</html>
