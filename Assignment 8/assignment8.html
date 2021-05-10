@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <title>T9-Like Keypad</title>
+    <style>
+        * {
+            font-family: verdana;
+            margin: 0;
+        }
+        h3 {
+            font-size: 25px;
+        }
+        body {
+            background: rgb(99, 128, 148);
+        }
+        .wrapper {
+            width: 100%;
+            max-width: 170px;
+            margin: 0 auto;
+        }
+
+        .flex-container {
+            display: flex;
+            background: rgba(128, 128, 128, 0.322);
+            flex-wrap: wrap;
+        }
+
+        button{
+            height: 56px;
+            flex-basis: 56.6px;
+        }
+
+        #reset {
+            flex-basis: 56.6px;
+        }
+    
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <h3>T9 Keypad</h3>
+    <div class="flex-container">
+        <input id="in" type="text" value=""/>
+        <button>abc</button>
+        <button>def</button>
+        <button>ghi</button>
+        <button>jkl</button>
+        <button>mno</button>
+        <button>pqrs</button>
+        <button>tuv</button>
+        <button>wxyz</button>
+        <input type="reset" value="reset" id="reset">
+    </div>
+    
+</div>
+
+
+<script>
+    let num = 0;
+    let timer;
+    let buttons = document.querySelectorAll("button");
+    let inputBox = document.getElementById("in");
+
+    buttons.forEach(function(b){
+        b.addEventListener("click", function(event){
+            let letters = b.innerText.split("");
+
+            num++;
+            console.log("num is " + num + " letter is " + letters[(num - 1) % letters.length]);
+
+            clearTimeout(timer);
+            timer = setTimeout(function(){
+                console.log("time out called, HOW?!");
+                if(letters[(num - 1) % letters.length] == undefined)
+                {
+                    console.log(`num when undef is ${num}`);
+                    num = 0;
+                }
+                else
+                {
+                    inputBox.value += letters[(num - 1) % letters.length];
+                    num = 0;
+                    console.log("reset triggered");
+                }       
+            },500);
+        });
+    });
+
+    let reset = document.getElementById("reset").addEventListener("click", function(){
+        inputBox.value = "";
+    });
+
+
+    
+</script>
+</body>
+</html>
