@@ -52,9 +52,8 @@
         
     </div>
     <script>
-
+        //Array to track and sort word and stored words
         const sortWords = [];
-        const testArray = ["dog", "cat", "Charlie", "Tippy"];
 
         let inputBox = document.getElementById("inputText");
         let list = document.getElementById("list");
@@ -63,6 +62,8 @@
         list.appendChild(ul);
 
         let num;
+
+        //if localStorage has items, num gets assigned
         if(localStorage.length > 0){
             num = localStorage.length;
             console.log("num local storage is called and is valued at " + num);
@@ -119,6 +120,7 @@
             num++;
         });
 
+        //clears list, localstorage, console and reassigns num to zero
         let reset = document.getElementById("reset").addEventListener("click", function(){
             ul.innerText = "";
             localStorage.clear();
