@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Sorted</title>
+    <style>
+        * {
+            font-family: verdana;
+            margin: 0;
+        }
+        body{
+            background: rgb(99, 128, 148);
+        }
+        /* .container{
+            height: 200px;
+            position: relative;
+            border: 3px solid green;
+        } */
+        .wrapper {
+            margin: 0;
+            /* left: 40%; */
+            /* position: absolute; */
+            /* top: 50%; */
+            /* -ms-transform: translateY(-50%); */
+            /* transform: translateY(-50%); */
+            /* border: 3px solid rgb(21, 182, 21); */
+        }
+        /* .list {
+            margin: 0;
+            left: 40%;
+            position: absolute;
+            top: 70%;
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+            border: 3px solid rgb(21, 182, 21); 
+        } */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="wrapper">
+            <input type="text" name="" id="inputText" value="">
+            <input type="submit" value="submit" id="sub">
+            <input type="reset" value="clear" id="reset">
+            
+        </div>
+        <div class="list" id="list">
+
+        </div>
+        
+    </div>
+    <script>
+
+        const sortWords = [];
+        const testArray = ["dog", "cat", "Charlie", "Tippy"];
+
+        let inputBox = document.getElementById("inputText");
+        let list = document.getElementById("list");
+        let ul = document.createElement("UL");
+        ul.setAttribute("id", "myUL");
+        list.appendChild(ul);
+
+        let num;
+        if(localStorage.length > 0){
+            num = localStorage.length;
+            console.log("num local storage is called and is valued at " + num);
+        }
+        else{
+            num = 0;
+        }
+         
+
+        //retrieve if stuff already stored
+        if(localStorage.length > 0){
+            for(let i = 0; i<localStorage.length; i++){
+            let litem = document.createElement("LI");
+            litem.innerHTML = localStorage[i.toString()];
+            ul.appendChild(litem);
+        };
+        }
+        
+
+        let submit = document.getElementById("sub").addEventListener("click", function(){
+            
+
+            //clear list
+            ul.innerText = "";
+
+            //update array when page is refreshed so that array isn't empty while localstorage has elements
+            if(sortWords.length != localStorage.length){
+                for(let i = 0; i<localStorage.length;i++){
+                    sortWords.push(localStorage[i.toString()]);
+                }
+            };
+
+            //store word
+            localStorage.setItem(num.toString(),inputBox.value);
+            inputBox.value = "";
+            console.log("Local Storage length " + localStorage.length);
+    
+
+            //Add stored word into array, then sort array
+            console.log(`This is getting added to the array ${localStorage[num.toString()]}`);
+            sortWords.push(localStorage[num.toString()]);
+            
+            sortWords.sort();
+            console.log(sortWords);
+
+            //print stored words
+            for(let i = 0; i<sortWords.length; i++){
+                let litem = document.createElement("LI");
+                litem.innerHTML = sortWords[i];
+                ul.appendChild(litem);
+            };
+
+            //num is used to generate key name
+            num++;
+        });
+
+        let reset = document.getElementById("reset").addEventListener("click", function(){
+            ul.innerText = "";
+            localStorage.clear();
+            num = 0;
+            while(sortWords.length > 0){
+                sortWords.pop();
+            }
+            console.clear();
+        });
+    </script>
+</body>
+</html>
