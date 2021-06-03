@@ -1,0 +1,23 @@
+body {
+    font-family: Arial; font-size: 14px; font-style: normal;
+}
+
+.box {
+    padding: 10px;
+    width: 300px;
+    border:1px solid gray;
+    margin-bottom: 5px;
+}
+
+#item {
+    width: 50%
+}
+
+#clear {
+    float: right;
+}
+
+li:hover{
+    font-weight: bold;
+    cursor: pointer;
+}

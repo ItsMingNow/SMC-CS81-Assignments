@@ -1,0 +1,20 @@
+{
+  "name": "final_test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "nodemon": "nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.0",
+    "tone": "^14.7.77"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}

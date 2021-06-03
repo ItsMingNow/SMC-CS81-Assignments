@@ -1,0 +1,209 @@
+<html>
+    <head>
+        <title>My To-do List</title>
+        <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+        <link rel="stylesheet" type="text/css" href="/main.css">
+        <script>
+            /*
+                As mentioned in the Test 2 prompt, the goal of this test is to
+                make the application behave as described.
+
+                This HTML page is the page served to a user's browser by
+                the Express server running in app.js. Because this content
+                is loaded on a client's browser, this HTML is using jQuery
+                AJAX to communicate to the Express server for it to know
+                what to do with the data manipulated in the TODO and Completed
+                lists. This code is provided for you to reference when completing
+                the server-side (app.js) code. You should not need to update this
+                to make the code behave as described in the Test 2 Canvas page,
+                but you may modify if you feel you must to complete the test.
+
+                GOOD LUCK!
+            */
+
+            $(document).ready(() => {
+
+                /*
+                    ADD a todo task to the TODO list
+                */
+                $("#submit").click(() => {
+                    addTask()
+                });
+
+                $(document).on("keypress", (e) => {
+                    if (e.which == 13) {
+                        addTask()
+                    }
+                });
+
+                function addTask() {
+                    // get value of input
+                    let task = $("#item").val()
+                    if (task.length < 1) {
+                        alert("Please enter a todo task.")
+                        return
+                    }
+
+                    // this will pass data in json format to the
+                    // server side. Ex. {"task": "my_task_here"}
+                    let postData = JSON.stringify({
+                        "task": task,
+                    })
+
+                    /*
+                        jQuery AJAX POST request to server side
+                        this will hit localhost:3000/task with
+                        json data defined above as well as specify
+                        the data type which is 'json' so the server
+                        understands how to parse the data.
+                    */
+                    $.ajax({
+                        url: "/task",
+                        type: "POST",
+                        data: postData,
+                        contentType:"application/json",
+                        success: (res, status) => {
+                            // add item to TODO list
+                            $("#todo").append(`<li class="todo">${task}</li>`);
+                            // clear input
+                            $("#item").val("");
+                        },
+                        error: (xhr, _, err) => {
+                            /*
+                                if the server returns a non-200 response status
+                                code, then we enter this error callback. If the
+                                callback sees a 400 response status code from the
+                                returned ajax call, we alert to the user that a
+                                duplicate task already exists.
+                            */
+                            if (xhr.status == 400) {
+                                alert(`${err}: task already exists!`);
+                            }
+                        }
+                    })
+                }
+
+                /*
+                    DELETE ALL tasks in both TODO and Completed lists
+                */
+                $("#clear").click(() => {
+                    $.ajax({
+                        url: "/tasks",
+                        type: "DELETE",
+                        success: function(res, status){
+                            $("#todo").html("");
+                            $("#completed").html("");
+                        }
+                    })
+                });
+
+                /*
+                    Move task from TODO list to Completed list when a user
+                    single-clicks a task in the TODO list. The jquery selector
+                    is used on the <ul> element with class '.todo' to delegate
+                    a click event listener for each child <li> item.
+                */
+                $("#todo").on('click', 'li.todo', (event) => {
+                    /*
+                        event.target is the child <li> element in the TODO list
+                        that this listener should trigger for since we used event
+                        delegation.
+                    */
+                    let task = $(event.target).text();
+                    $.ajax({
+                        url: `/task/todo/${task}`,
+                        type: "DELETE",
+                        success: function(res, status){
+                            // delete from todo
+                            $(event.target).remove();
+                            // move to completed
+                            $("#completed").append(`<li class="completed">${task}</li>`)
+                        }
+                    })
+                });
+
+                /*
+                    DELETE task from Completed when a user single-clicks
+                    the task in the Completed list. The jquery selector is using
+                    the <li> item class attribute '.completed' to select the task.
+                */
+                $("#completed").on('click', 'li.completed', (event) => {
+                    /*
+                        event.target is the child <li> element in the Complete list
+                        that this listener should trigger for since we used event
+                        delegation.
+                    */
+                    let task = $(event.target).text();
+                    $.ajax({
+                        url: `/task/completed/${task}`,
+                        type: "DELETE",
+                        success: function(res, status){
+                            $(event.target).remove();
+                        }
+                    })
+                });
+
+                /*
+                    When the document loads all TODO and Completed
+                    tasks should be loaded into the UI
+                */
+                $.get("/tasks", (response, status) => {
+                    /*
+                        Get items from each list. The express application
+                        is returning the datastore as an object as it's
+                        defined in app.js:
+
+                        {
+                            'todo': ["finish test 2"],
+                            'completed': ["read the test instructions"],
+                        }
+
+                        Then create DOM list elements corresponding to the type
+                        of task it is (todo or completed).
+                    */
+                    let todoTasks = response.todo;
+                    for (let task of todoTasks) {
+                        $("#todo").append(`<li class="todo">${task}</li>`)
+                    }
+                    let completedTasks = response.completed;
+                    for (let task of completedTasks) {
+                        $("#completed").append(`<li class="completed">${task}</li>`)
+                    }
+                });
+
+                /////////////// DO NOT MODIFY ///////////////
+                // This is used to create similar ajax function
+                // for the DELETE method as jQuery has for the
+                // GET and POST methods
+                $.delete = (url, callback, type) => {
+                    return $.ajax({
+                        url: url,
+                        type: 'DELETE',
+                        success: callback,
+                        data: {},
+                        contentType: type
+                    });
+                }
+                /////////////////////////////////////////////
+            });
+        </script>
+    </head>
+
+    <body>
+        <div id="addItem" class="box">
+            Task:
+            <input id="item" type="text" name="add_item"/>
+            <button id="submit" type="button">Add</button>
+            <button id="clear" type="button">Clear All</button>
+        </div>
+        <div class="box">
+            <h4>TODO:</h4>
+            <ul id="todo"></ul>
+        </div>
+        <div class="box">
+            <h4>Completed:</h4>
+            <ul id="completed"></ul>
+        </div>
+    </body>
+
+</html>
